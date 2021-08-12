@@ -1,0 +1,6 @@
+
+
+Navbar  : https://tailwindui.com/components/application-ui/navigation/navbars
+
+Cards in dashboard : https://tailwinduikit.com/components/webapp/layout/grid_card#full_width_3_section_card
+

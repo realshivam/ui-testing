@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+      .carousel-open:checked+.carousel-item {
+        position: relative;
+        opacity: 100;
+      }
+    
+      .carousel-item {
+        -webkit-transition: opacity 0.6s ease-out;
+        transition: opacity 0.6s ease-out;
+        z-index: -1;
+      }
+    
+      #carousel-1:checked~.control-1,
+      #carousel-2:checked~.control-2,
+      #carousel-3:checked~.control-3 {
+        display: block;
+      }
+    
+      .carousel-indicators {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        bottom: 2%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 10;
+      }
+    
+      #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+      #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+      #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+        color: #2b6cb0;
+        /*Set to match the Tailwind colour you want the active one to be */
+      }
+    </style>
+</head>
+<body class="bg-gray-200">
+    
+<!-- component -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<div class="min-h-screen">
+  <div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
+  <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+    <div x-data="{ open: true }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+      <div class="flex flex-row items-center justify-between p-4">
+        <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Campus Chapter</a>
+        <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
+          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+            <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="index.html">Dashboard</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="upcoming-events.html">Upcoming Events</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="team-chat.html">Team Chat</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="discuss.html">Discuss</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="leaderboards.html">Leaderboard</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="allusers.html">All users</a>
+
+
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open" class="flex flex-row text-gray-900 bg-gray-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Myself</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+          <div  x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right">
+            <div class="px-2 pt-2 pb-4 bg-gray-100 rounded-md shadow-lg dark-mode:bg-gray-700  text-black">
+              <div class=" gap-4">
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2  dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="profile.html">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Profile</p>
+                    
+                  </div>
+                </a>
+
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="editprofile.html">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Edit Profile</p>
+                    <!-- <p class="text-sm">Check your latest comments</p> -->
+                  </div>
+                </a>
+
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Logout</p>
+                    
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>    
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!------------------------------------------------------------- navbar ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+  
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------Carousel start------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+
+<div class="carousel relative rounded relative overflow-hidden shadow-xl">
+  <div class="carousel-inner relative overflow-hidden w-full">
+    <!--Slide 1-->
+    <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
+      checked="checked">
+    <div class="carousel-item absolute opacity-0 bg-center" style="height:350px; ">
+      <div>  <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_850154658_200013292000928089_410842.jpg" style=" width: 100%;
+        height:100%;padding-left: -30px; " alt=""></div>
+  
+    </div>
+    <label for="carousel-3"
+      class="control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto flex justify-center content-center"><i
+        class="fas fa-angle-left mt-3"></i></label>
+    <label for="carousel-2"
+      class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto"><i
+        class="fas fa-angle-right mt-3"></i></label>
+
+    <!--Slide 2-->
+    <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+    <div class="carousel-item absolute opacity-0 bg-center" style="height:350px;">
+      <img src="https://cdn.codechef.com/download/small-banner/AUG21/1627734783.png" style=" width: 100%;
+      height: 100%;
+      object-fit: cover;" alt="">
+    </div>
+    <label for="carousel-1"
+      class=" control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto"><i
+        class="fas fa-angle-left mt-3"></i></label>
+    <label for="carousel-3"
+      class="next control-2 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto"><i
+        class="fas fa-angle-right mt-3"></i></label>
+
+    <!--Slide 3-->
+    <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+    <div class="carousel-item absolute opacity-0" style="height:350px;">
+    <img src="https://cdn.codechef.com/download/banner/1628600419.png" style=" width: 100%;
+    height: 100%;
+    object-fit: cover;" alt="">
+    </div>
+    <label for="carousel-2"
+      class="control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto"><i
+        class="fas fa-angle-left mt-3"></i></label>
+    <label for="carousel-1" 
+      class="next control-3 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto"><i
+        class="fas fa-angle-right mt-3"></i></label>
+
+    <!-- Add additional indicators for each slide-->
+    <ol class="carousel-indicators">
+      <li class="inline-block mr-3">
+        <label for="carousel-1"
+          class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+      </li>
+      <li class="inline-block mr-3">
+        <label for="carousel-2"
+          class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+      </li>
+      <li class="inline-block mr-3">
+        <label for="carousel-3"
+          class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+      </li>
+    </ol>
+
+  </div>
+</div>
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------carousel ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------main body starts------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+<br>
+<br>
+
+<!-- component -->
+<!-- component -->
+
+ 
+    <div class="w-full h-screen" id="main-body">
+      <div class="flex flex-col lg:grid lg:gap-4 2xl:gap-6 lg:grid-cols-4 2xl:row-span-2 2xl:pb-8 ml-2 pt-4 px-6">
+        <!-- Beginning of the component about Daniel Clifford -->
+        <div class="bg-indigo-600 lg:order-1 lg:row-span-1 2xl:row-span-1 lg:col-span-2 rounded-lg shadow-xl mb-5 lg:mb-0">
+          <div class="mx-6 my-8 2xl:mx-10">
+            <div class="w-8 md:w-9 lg:w-10 2xl:w-20 h-8 md:h-9 lg:h-10 2xl:h-20 r  ml-1 lg:ml-3 2xl:ml-0 md:-mt-1 2xl:-mt-4" src="#"></div>
+            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-12 lg:pl-16 2xl:pl-20 -mt-8 md:-mt-10 lg:-mt-11 2xl:-mt-20 2xl:mx-8">Recent Events</h1>
+ 
+          </div>
+          <div class="-mt-6 relative">
+            <p class="text-white text-xl 2xl:text-4xl font-bold px-7 lg:px-9 2xl:pt-6 2xl:mx-2">TrishulAThon</p>
+            <br />
+            <p class="text-white text-xl 2xl:text-4xl font-bold px-7 lg:px-9 2xl:pt-6 2xl:mx-2">UCODE 6</p>
+
+          </div>
+        </div>
+        <!-- Ending of the component about Daniel Clifford -->
+
+        <!-- Beginning of the component about Jonathan Walters -->
+        <div class="bg-gray-900 lg:order-2 lg:row-span-1 2xl:row-span-1 lg:col-span-1 rounded-lg shadow-xl pb-4 mb-5 lg:mb-0">
+          <div class="mx-8 2xl:mx-10 my-10 ">
+           
+            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 2xl:pl-24 -mt-8 md:-mt-10 2xl:-mt-16">Announcements</h1>
+            <div class="text-white text-xs md:text-base 2xl:text-2xl text-opacity-50 pl-11 md:pl-12 2xl:pl-24"></div>
+          </div>
+          <div class="-mt-8 mx-1 lg:mx-2">
+            <p class="text-white text-lg lg:text-xl 2xl:text-4xl font-semibold pt-1 px-6 2xl:px-8 lg:pl-5 lg:pr-8">Fill up the form </p>
+            <br />
+            <p class="text-white text-opacity-50 font-medium md:text-sm 2xl:text-3xl pl-6 lg:pl-5 pr-4 -mt-1 lg:mt-6 2xl:mt-2 2xl:px-8">- Sumit sir</p>
+          </div>
+        </div>
+        <!-- Ending of the component about Jonathan Walters -->
+
+        <!-- Beginning of the component about Jeanette Harmon -->
+        <div class="bg-primary-color-white lg:order-3 lg:row-span-2 2xl:row-span-1 lg:col-span-1 rounded-lg shadow-xl mb-5 lg:mb-0 2xl:mb-8">
+          <div class="mx-8 my-10 lg:my-8">
+            <div class="w-8 md:w-9 lg:w-11 2xl:w-20 h-8 md:h-9 lg:h-11 2xl:h-20  -mt-3 -ml-1 lg:-ml-0" src=""></div>
+            <h1 class="primary-color-blackish-blue text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 lg:pl-14 2xl:pl-24 -mt-8 md:-mt-10 lg:-mt-11 2xl:-mt-16">Dabur Red toothpaste</h1>
+            <h2 class="primary-color-blackish-blue-opacity text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 lg:pl-14 2xl:pl-24">self-approved</h2>
+          </div>
+          <div class="-mt-4 ml-5 mr-11">
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-bold px-2 lg:px-3 -mt-6 lg:-mt-5 2xl:mt-12 2xl:pb-6">Ab daanto se pisso patthar</p>
+            <br />
+            <p class="primary-color-blackish-blue-opacity font-medium md:text-sm 2xl:text-3xl pl-2 lg:pl-3 lg:pr-4 mb-6 2xl:pt-2 -mt-3">“ Thank you for the wonderful experience! I now have a job I really enjoy, and make a good living while doing something I love. ”</p>
+          </div>
+        </div>
+        <!-- Ending of the component about Jeanette Harmon -->
+
+        <!-- Beginning of the component about Patrick Abrams -->
+        <div class="bg-purple-800 lg:order-4 lg:row-span-2 2xl:row-span-1 col-span-2 rounded-lg shadow-xl mb-5 lg:mb-0 2xl:mb-8 lg:pb-14 2xl:pb-20">
+          <div class="mx-8 my-8">
+            <div class="w-8 md:w-9 lg:w-10 2xl:w-20 h-8 md:h-9 lg:h-10 2xl:h-20  lg:-mt-3"></div>
+            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-12 md:pl-14 2xl:pl-24 -mt-8 md:-mt-10 lg:-mt-11 2xl:-mt-16">Recent Discussion</h1>
+            <div class="text-white text-xs md:text-base 2xl:text-2xl text-opacity-50 pl-12 md:pl-14 2xl:pl-24"></div>
+          </div>
+          <div class="px-3 -mt-3 mb-5 lg:mb-0">
+            <p class="text-white text-lg 2xl:text-4xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-8">Which is the best IDE ?</p>
+            <br />
+            <!-- <p class="text-white text-opacity-50 font-medium md:text-sm 2xl:text-3xl px-4 mt-1 lg:-mt-3 2xl:mt-6">Universe</p> -->
+            <p class="text-white text-lg 2xl:text-4xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-8">Hackerank vs codeforces</p>
+          </div>
+        </div>
+        <!-- Ending of the component about Patrick Abrams -->
+
+        <!-- Beginning of the component about Kira Whittle -->
+        <div class="bg-primary-color-white lg:order-2 lg:row-span-4 lg:col-span-1 rounded-lg shadow-xl mb-5 lg:pb-4 2xl:h-screen">
+          <div class="mx-8 my-8 lg:pl-1">
+            <div class="w-8 md:w-9 lg:w-12 2xl:w-20 h-8 md:h-9 lg:h-12 2xl:h-20  lg:-mt-4 -ml-1 lg:-ml-4" ></div>
+            <h1 class="primary-color-blackish-blue text-xs md:text-base 2xl:text-2xl pl-10 md:pl-12 2xl:pl-24 -mt-8 md:-mt-10 lg:-mt-12 2xl:-mt-16">Recent Blogs</h1>
+            <h2 class="primary-color-blackish-blue-opacity text-xs md:text-base 2xl:text-2xl pl-10 md:pl-12 2xl:pl-24">--------</h2>
+          </div>
+          <div class="px-3 lg:px-5 lg:-mt-4 mb-5 lg:mb-0">
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0">Such a life-changing experience. Highly recommended!</p>
+            <br />
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0">Ways to show-off without knowing much</p><br>
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0">How to stay active in the group</p><br>
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0">How to be diplomatic</p><br>
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0">Reasons to learn DP after for loop</p><br>
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0">Five ways to stay in everybody's good books</p><br>
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0">MERN - the ultimate tool</p><br>
+            <!-- <p class="primary-color-blackish-blue-opacity font-medium md:text-sm 2xl:text-3xl px-4 lg:px-0 2xl:px-4 lg:pr-3 mt-2 lg:-mt-1 2xl:mt-2 2xl:pb-64">“ Before joining the bootcamp, I’ve never written a line of code. I needed some structure from professionals who can help me learn programming step by step. I was encouraged to enroll by a former student of theirs who can only say wonderful things about the program. The entire curriculum and staff did not disappoint. They were very hands-on and I never had to wait long for assistance. The agile team project, in particular, was outstanding. It took my learning to the next level in a way that no tutorial could ever have. In fact, I’ve often referred to it during interviews as an example of my developent experience. It certainly helped me land a job as a full-stack developer after receiving multiple offers. 100% recommend! ”</p> -->
+          </div>
+        </div>
+        <!-- Ending of the component about Kira Whittle -->
+      </div>
+   
+
+
+
+
+  
+
+
+  
+  <!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------main body Ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+ 
+  <!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------Footer starts------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+<!-- component -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconscout/unicons@3.0.6/css/line.css">
+
+
+
+<footer class="bg-gray-800 pt-10 sm:mt-10 pt-10">
+    <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
+        <!-- Col-1 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Getting Started
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Installation
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Release Notes
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Upgrade Guide
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Using with Preprocessors
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Optimizing for Production
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Browser Support
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                IntelliSense
+            </a>
+        </div>
+
+        <!-- Col-2 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Core Concepts
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Utility-First
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Responsive Design
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Hover, Focus, & Other States
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Dark Mode
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Adding Base Styles
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Extracting Components
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Adding New Utilities
+            </a>
+        </div>
+
+        <!-- Col-3 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Customization
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Configuration
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Theme Configuration
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Breakpoints
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Customizing Colors
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Customizing Spacing
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Configuring Variants
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Plugins
+            </a>
+        </div>
+
+        <!-- Col-3 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Community
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                GitHub
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Discord
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Twitter
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                YouTube
+            </a>
+        </div>
+    </div>
+
+    <!-- Copyright Bar -->
+    <div class="pt-2">
+        <div class="flex pb-5 px-3 m-auto pt-5 
+            border-t border-gray-500 text-gray-400 text-sm 
+            flex-col md:flex-row max-w-6xl">
+            <div class="mt-2">
+                © Copyright 1998-year. All Rights Reserved.
+            </div>
+
+            <!-- Required Unicons (if you want) -->
+            <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-facebook-f"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-twitter-alt"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-youtube"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-linkedin"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</div>
+</div>
+
+</div>
+</body>
+</html>
+
+
+
+
+
